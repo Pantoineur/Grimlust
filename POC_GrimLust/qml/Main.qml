@@ -11,8 +11,6 @@ GameWindow {
     //  * Add plugins to monetize, analyze & improve your apps (available with the Pro Licenses)
     //licenseKey: "<generate one from https://felgo.com/licenseKey>"
 
-    activeScene: scene
-
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
     // you can set this size to any resolution you would like your project to start with, most of the times the one of your main target device
@@ -20,34 +18,32 @@ GameWindow {
     screenWidth: 960
     screenHeight: 640
 
-    Scene {
-        id: scene
-
-        // the "logical size" - the scene content is auto-scaled to match the GameWindow size
-        width: 480
-        height: 320
+    property GameScene gameScene: sceneLoader.item && sceneLoader.item.gameScene
+    property MenuScene menuScene: sceneLoader.item && sceneLoader.item.menuScene
 
 
-        Rectangle {
-            id: background
-
-            anchors.fill: parent
-            anchors.bottomMargin: 60
-
-            Image {
-                id: name
-                source: "../assets/backgrounds/background_cave.jpg"
-
-                anchors.fill: parent
-            }
+    Loader {
+        id: sceneLoader
+        onLoaded: gameWindow.state = "game"
+        // start loading other scenes after 500 ms
+        Timer {
+          id: loadingTimer
+          interval: 500
+          onTriggered: sceneLoader.source = Qt.resolvedUrl("MainItem.qml")
         }
-
-        Rectangle {
-
-
-            color: "pink"
-        }
-
-
     }
+    Component.onCompleted: loadingTimer.start()
+
+    states: [
+        State {
+            name: "game"
+            PropertyChanges {target: gameScene; opacity: 1}
+            PropertyChanges {target: gameWindow; activeScene: gameScene}
+        },
+        State {
+            name: "menu"
+            PropertyChanges {target: menuScene; opacity: 1}
+            PropertyChanges {target: gameWindow; activeScene: menuScene}
+        }
+    ]
 }

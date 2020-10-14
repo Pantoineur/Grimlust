@@ -58,3 +58,9 @@ win32 {
 macx {
     ICON = macx/app_icon.icns
 }
+
+DISTFILES += \
+    qml/MainItem.qml \
+    qml/MenuScene.qml \
+    qml/TemplateButton.qml \
+    qml/TemplateScene.qml \
