@@ -63,4 +63,5 @@ DISTFILES += \
     qml/MainItem.qml \
     qml/MenuScene.qml \
     qml/TemplateButton.qml \
+    qml/TemplateCharacter.qml \
     qml/TemplateScene.qml \

@@ -5,7 +5,13 @@ EntityBase {
     id: root
 
     entityId: "entity"
-    entityType: "customEntity"
+    entityType: "customEntity" 
+
+    property alias label : labelN
+
+    property int default_x : 0
+
+    property int default_y : 0
 
     Sprite {
         width: 80
@@ -14,7 +20,16 @@ EntityBase {
         Image {
             id: image
             source: "../assets/cards/latest.png"
-            anchors.fill: root
+
+            fillMode: Image.PreserveAspectFit
+            anchors.fill: parent
+        }
+
+        Text {
+            id: labelN
+            text:qsTr("TEST");
+            anchors.centerIn: parent
+            color: "white"
         }
     }
 
