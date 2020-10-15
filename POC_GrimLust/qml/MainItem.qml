@@ -17,9 +17,5 @@ Item {
     // game scene
     GameScene {
         id: gameScene
-
-        Card {
-            id: test
-        }
     }
 }
