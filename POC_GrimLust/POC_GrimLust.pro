@@ -36,9 +36,13 @@ DEPLOYMENTFOLDERS += assetsFolder
 # during development, use the qmlFolder deployment because you then get shorter compilation times (the qml files do not need to be compiled to the binary but are just copied)
 # also, for quickest deployment on Desktop disable the "Shadow Build" option in Projects/Builds - you can then select "Run Without Deployment" from the Build menu in Qt Creator if you only changed QML files; this speeds up application start, because your app is not copied & re-compiled but just re-interpreted
 
+INCLUDEPATH += ./src \
+               ./include
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += src/main.cpp
+SOURCES += src/main.cpp \
+    src/character.cpp \
+    src/player.cpp
 
 
 android {
@@ -65,3 +69,7 @@ DISTFILES += \
     qml/TemplateButton.qml \
     qml/TemplateCharacter.qml \
     qml/TemplateScene.qml \
+
+HEADERS += \
+    include/player.h \
+    include/character.h
